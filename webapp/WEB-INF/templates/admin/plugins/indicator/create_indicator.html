@@ -1,0 +1,15 @@
+<@rowBoxHeader i18nTitleKey="indicator.create_indicator.pageTitle">
+    <form class="form-horizontal" method="post" name="create_indicator" action="jsp/admin/plugins/indicator/ManageIndicators.jsp">
+        <@messages errors=errors />
+        <input type="hidden" id="id" name="id"/>
+        
+        <@fieldInputText i18nLabelKey="indicator.create_indicator.labelIndKey" inputName="ind_key" mandatory=true value="${indicator.indKey!''}" i18nHelpBlockKey="indicator.create_indicator.labelIndKey.help" />
+        <@fieldInputText i18nLabelKey="indicator.create_indicator.labelLabel" inputName="label" mandatory=true value="${indicator.label!''}" i18nHelpBlockKey="indicator.create_indicator.labelLabel.help" />
+        <@fieldInputText i18nLabelKey="indicator.create_indicator.labelDescription" inputName="description" mandatory=true value="${indicator.description!''}" i18nHelpBlockKey="indicator.create_indicator.labelDescription.help" />
+        <@fieldInputText i18nLabelKey="indicator.create_indicator.labelIndValue" inputName="ind_value" mandatory=true value="${indicator.indValue!''}" i18nHelpBlockKey="indicator.create_indicator.labelIndValue.help" />
+        <@fieldInputText i18nLabelKey="indicator.create_indicator.labelIndTarget" inputName="ind_target"  value="${indicator.indTarget!''}" i18nHelpBlockKey="indicator.create_indicator.labelIndTarget.help" />
+        <@fieldInputText i18nLabelKey="indicator.create_indicator.labelHistoryPeriod" inputName="history_period" mandatory=true value="${indicator.historyPeriod!''}" i18nHelpBlockKey="indicator.create_indicator.labelHistoryPeriod.help" />
+        <@actionButtons button1Name="action_createIndicator" button2Name="view_manageIndicators"/>
+    </form>
+</@rowBoxHeader>
+

@@ -1,0 +1,72 @@
+<@rowBox>
+    <@boxHeader i18nTitleKey="indicator.manage_indicators.tableLabel">
+        <@headerButtons>
+
+        
+        <form class="form-inline pull-right" method="post" name="manage_indicators" action="jsp/admin/plugins/indicator/ManageIndicators.jsp">
+            <!-- Add pull-right to class1 -->
+            <@actionButtons button1Name="view_createIndicator" icon1="icon-plus icon-white" i18nValue1Key="indicator.manage_indicators.buttonAdd" />
+        </form>
+        
+    </@headerButtons>
+    </@boxHeader>
+    <@boxBody>    
+    <@messages infos=infos />
+    <@paginationAdmin paginator=paginator combo=1 />
+    
+    <@table>
+        <tr>
+            <input type="hidden" id="id" name="id"/>
+            <th>#i18n{indicator.manage_indicators.columnIndKey}</th>
+            <th>#i18n{indicator.manage_indicators.columnLabel}</th>
+            <th>#i18n{indicator.manage_indicators.columnDescription}</th>
+            <th>#i18n{indicator.manage_indicators.columnIndValue}</th>
+            <th>#i18n{indicator.manage_indicators.columnIndTarget}</th>
+            <th>#i18n{indicator.manage_indicators.columnHistoryPeriod}</th>
+            <th>#i18n{portal.util.labelActions}</th>
+        </tr>
+        <@tableHeadBodySeparator />
+            <#list indicator_list as indicator >
+        <tr>
+            <input type="hidden" id="id" name="id"/>
+            <td>
+                ${indicator.indKey}
+            </td>
+            <td>
+                ${indicator.label}
+            </td>
+            <td>
+                ${indicator.description}
+            </td>
+            <td>
+                ${indicator.value!""}
+            </td>
+            <td>
+                ${indicator.indTarget!""}
+            </td>
+            <td>
+                ${indicator.historyPeriod!""}
+            </td>
+        <td>
+            <a href="jsp/admin/plugins/indicator/ManageIndicators.jsp?view=modifyIndicator&id=${indicator.id}"
+               class="btn btn-primary btn-small" title="#i18n{portal.util.labelModify}">
+                <i class="fa fa-pencil"></i>
+            </a>
+            <a href="jsp/admin/plugins/indicator/ManageHistory.jsp?key=${indicator.indKey}"
+               class="btn btn-primary btn-small" title="#i18n{portal.util.labelModify}">
+                <i class="fa fa-history"></i>
+            </a>
+            <a href="jsp/admin/plugins/indicator/ManageIndicators.jsp?action=confirmRemoveIndicator&id=${indicator.id}"
+               class="btn btn-danger btn-small" title="#i18n{portal.util.labelDelete}" >
+                <i class="fa fa-trash"></i>
+            </a>
+        </td>
+        </tr>
+        </#list>
+    </@table>
+
+    <@paginationAdmin paginator=paginator />
+
+  </@boxBody>
+</@rowBox>
+

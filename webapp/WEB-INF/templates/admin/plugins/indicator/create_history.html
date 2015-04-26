@@ -1,0 +1,12 @@
+<@rowBoxHeader i18nTitleKey="indicator.create_history.pageTitle">
+    <form class="form-horizontal" method="post" name="create_history" action="jsp/admin/plugins/indicator/ManageHistory.jsp">
+        <@messages errors=errors />
+        <input type="hidden" name="ind_key" value="${history.indKey}"/>
+        <h3>Indicateur : ${history.indKey}</h3>
+        <@fieldInputText i18nLabelKey="indicator.create_history.labelTimeCode" inputName="time_code" mandatory=true value="${history.timeCode!''}" i18nHelpBlockKey="indicator.create_history.labelTimeCode.help" />
+        <@fieldInputText i18nLabelKey="indicator.create_history.labelIndValue" inputName="ind_value" mandatory=true value="${history.indValue!''}" i18nHelpBlockKey="indicator.create_history.labelIndValue.help" />
+        <@fieldInputText i18nLabelKey="indicator.create_history.labelIndTarget" inputName="ind_target"  value="${history.indTarget!''}" i18nHelpBlockKey="indicator.create_history.labelIndTarget.help" />
+        <@actionButtons button1Name="action_createIndicatorHistory" button2Name="view_manageIndicatorHistorys"/>
+    </form>
+</@rowBoxHeader>
+
