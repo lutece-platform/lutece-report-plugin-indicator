@@ -76,6 +76,14 @@ public interface IIndicatorDAO
     Indicator load( int nKey, Plugin plugin );
 
     /**
+     * Load the data from the table
+     * @param strKey The identifier of the indicator
+     * @param plugin the Plugin
+     * @return The instance of the indicator
+     */
+    Indicator loadByKey( String strKey, Plugin plugin);
+
+    /**
      * Load the data of all the indicator objects and returns them as a collection
      * @param plugin the Plugin
      * @return The collection which contains the data of all the indicator objects
@@ -89,4 +97,5 @@ public interface IIndicatorDAO
      * @param plugin The plugin
      */
     void updateValue( String strKey, int nValue, Plugin plugin );
+
 }

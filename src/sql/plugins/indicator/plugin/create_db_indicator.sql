@@ -21,10 +21,9 @@ PRIMARY KEY (id_indicator)
 
 DROP TABLE IF EXISTS indicator_history;
 CREATE TABLE indicator_history (
-id_history int(6) NOT NULL,
 ind_key varchar(50) NOT NULL default '',
-time_code int(11) NOT NULL default '0',
+time_code varchar(12) NOT NULL default '',
 ind_value int(11) NOT NULL default '0',
 ind_target int(11) NOT NULL default '0',
-PRIMARY KEY (id_history)
+PRIMARY KEY ( ind_key, time_code )
 );

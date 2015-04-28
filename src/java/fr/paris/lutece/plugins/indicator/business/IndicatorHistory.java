@@ -44,31 +44,12 @@ import javax.validation.constraints.*;
 public class IndicatorHistory
 {
     // Variables declarations 
-    private int _nId;
     @NotEmpty( message = "#i18n{indicator.validation.history.IndKey.notEmpty}" )
     @Size( max = 50, message = "#i18n{indicator.validation.history.IndKey.size}" )
     private String _strIndKey;
-    private int _nTimeCode;
+    private String _strTimeCode;
     private int _nIndValue;
     private int _nIndTarget;
-
-    /**
-     * Returns the Id
-     * @return The Id
-     */
-    public int getId(  )
-    {
-        return _nId;
-    }
-
-    /**
-     * Sets the Id
-     * @param nId The Id
-     */
-    public void setId( int nId )
-    {
-        _nId = nId;
-    }
 
     /**
      * Returns the IndKey
@@ -92,18 +73,18 @@ public class IndicatorHistory
      * Returns the TimeCode
      * @return The TimeCode
      */
-    public int getTimeCode(  )
+    public String getTimeCode(  )
     {
-        return _nTimeCode;
+        return _strTimeCode;
     }
 
     /**
      * Sets the TimeCode
-     * @param nTimeCode The TimeCode
+     * @param strTimeCode The TimeCode
      */
-    public void setTimeCode( int nTimeCode )
+    public void setTimeCode( String strTimeCode )
     {
-        _nTimeCode = nTimeCode;
+        _strTimeCode = strTimeCode;
     }
 
     /**

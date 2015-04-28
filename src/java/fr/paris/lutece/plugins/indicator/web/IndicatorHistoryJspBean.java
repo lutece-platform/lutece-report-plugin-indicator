@@ -59,18 +59,18 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
     // Constants
 
     // templates
-    private static final String TEMPLATE_MANAGE_INDICATORHISTORYS = "/admin/plugins/indicator/manage_history.html";
-    private static final String TEMPLATE_CREATE_INDICATORHISTORY = "/admin/plugins/indicator/create_history.html";
-    private static final String TEMPLATE_MODIFY_INDICATORHISTORY = "/admin/plugins/indicator/modify_history.html";
+    private static final String TEMPLATE_MANAGE_HISTORY = "/admin/plugins/indicator/manage_history.html";
+    private static final String TEMPLATE_CREATE_HISTORY = "/admin/plugins/indicator/create_history.html";
+    private static final String TEMPLATE_MODIFY_HISTORY = "/admin/plugins/indicator/modify_history.html";
 
     // Parameters
-    private static final String PARAMETER_ID = "id";
     private static final String PARAMETER_KEY = "key";
+    private static final String PARAMETER_TIMECODE = "timecode";
 
     // Properties for page titles
-    private static final String PROPERTY_PAGE_TITLE_MANAGE_INDICATORHISTORYS = "indicator.manage_history.pageTitle";
-    private static final String PROPERTY_PAGE_TITLE_MODIFY_INDICATORHISTORY = "indicator.modify_history.pageTitle";
-    private static final String PROPERTY_PAGE_TITLE_CREATE_INDICATORHISTORY = "indicator.create_history.pageTitle";
+    private static final String PROPERTY_PAGE_TITLE_MANAGE_HISTORY = "indicator.manage_history.pageTitle";
+    private static final String PROPERTY_PAGE_TITLE_MODIFY_HISTORY = "indicator.modify_history.pageTitle";
+    private static final String PROPERTY_PAGE_TITLE_CREATE_HISTORY = "indicator.create_history.pageTitle";
 
     // Markers
     private static final String MARK_INDICATORHISTORY_LIST = "history_list";
@@ -79,31 +79,30 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
     private static final String JSP_MANAGE_HISTORY = "jsp/admin/plugins/indicator/ManageHistory.jsp";
 
     // Properties
-    private static final String MESSAGE_CONFIRM_REMOVE_INDICATORHISTORY = "indicator.message.confirmRemoveIndicatorHistory";
-    private static final String PROPERTY_DEFAULT_LIST_INDICATORHISTORY_PER_PAGE = "indicator.listIndicatorHistorys.itemsPerPage";
+    private static final String MESSAGE_CONFIRM_REMOVE_HISTORY = "indicator.message.confirmRemoveIndicatorHistory";
     private static final String VALIDATION_ATTRIBUTES_PREFIX = "indicator.model.entity.history.attribute.";
 
     // Views
-    private static final String VIEW_MANAGE_INDICATORHISTORYS = "manageIndicatorHistorys";
-    private static final String VIEW_CREATE_INDICATORHISTORY = "createIndicatorHistory";
-    private static final String VIEW_MODIFY_INDICATORHISTORY = "modifyIndicatorHistory";
+    private static final String VIEW_MANAGE_HISTORY = "manageIndicatorHistorys";
+    private static final String VIEW_CREATE_HISTORY = "createIndicatorHistory";
+    private static final String VIEW_MODIFY_HISTORY = "modifyIndicatorHistory";
 
     // Actions
-    private static final String ACTION_CREATE_INDICATORHISTORY = "createIndicatorHistory";
-    private static final String ACTION_MODIFY_INDICATORHISTORY = "modifyIndicatorHistory";
-    private static final String ACTION_REMOVE_INDICATORHISTORY = "removeIndicatorHistory";
-    private static final String ACTION_CONFIRM_REMOVE_INDICATORHISTORY = "confirmRemoveIndicatorHistory";
+    private static final String ACTION_CREATE_HISTORY = "createIndicatorHistory";
+    private static final String ACTION_MODIFY_HISTORY = "modifyIndicatorHistory";
+    private static final String ACTION_REMOVE_HISTORY = "removeIndicatorHistory";
+    private static final String ACTION_CONFIRM_REMOVE_HISTORY = "confirmRemoveIndicatorHistory";
 
     // Infos
-    private static final String INFO_INDICATORHISTORY_CREATED = "indicator.info.history.created";
-    private static final String INFO_INDICATORHISTORY_UPDATED = "indicator.info.history.updated";
-    private static final String INFO_INDICATORHISTORY_REMOVED = "indicator.info.history.removed";
+    private static final String INFO_HISTORY_CREATED = "indicator.info.history.created";
+    private static final String INFO_HISTORY_UPDATED = "indicator.info.history.updated";
+    private static final String INFO_HISTORY_REMOVED = "indicator.info.history.removed";
 
     // Session variable to store working values
     private IndicatorHistory _history;
 
-    @View( value = VIEW_MANAGE_INDICATORHISTORYS, defaultView = true )
-    public String getManageIndicatorHistorys( HttpServletRequest request )
+    @View( value = VIEW_MANAGE_HISTORY, defaultView = true )
+    public String getManageHistory( HttpServletRequest request )
     {
         _history = null;
 
@@ -112,7 +111,7 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
         Map<String, Object> model = getPaginatedListModel( request, MARK_INDICATORHISTORY_LIST, listIndicatorHistorys,
                 JSP_MANAGE_HISTORY );
         model.put( MARK_KEY, strKey );
-        return getPage( PROPERTY_PAGE_TITLE_MANAGE_INDICATORHISTORYS, TEMPLATE_MANAGE_INDICATORHISTORYS, model );
+        return getPage( PROPERTY_PAGE_TITLE_MANAGE_HISTORY, TEMPLATE_MANAGE_HISTORY, model );
     }
 
     /**
@@ -121,7 +120,7 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
      * @param request The Http request
      * @return the html code of the history form
      */
-    @View( VIEW_CREATE_INDICATORHISTORY )
+    @View( VIEW_CREATE_HISTORY )
     public String getCreateIndicatorHistory( HttpServletRequest request )
     {
         String strKey = request.getParameter( PARAMETER_KEY );
@@ -130,7 +129,7 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
         Map<String, Object> model = getModel(  );
         model.put( MARK_INDICATORHISTORY, _history );
 
-        return getPage( PROPERTY_PAGE_TITLE_CREATE_INDICATORHISTORY, TEMPLATE_CREATE_INDICATORHISTORY, model );
+        return getPage( PROPERTY_PAGE_TITLE_CREATE_HISTORY, TEMPLATE_CREATE_HISTORY, model );
     }
 
     /**
@@ -139,7 +138,7 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
      * @param request The Http Request
      * @return The Jsp URL of the process result
      */
-    @Action( ACTION_CREATE_INDICATORHISTORY )
+    @Action( ACTION_CREATE_HISTORY )
     public String doCreateIndicatorHistory( HttpServletRequest request )
     {
         populate( _history, request );
@@ -147,15 +146,34 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
         // Check constraints
         if ( !validateBean( _history, VALIDATION_ATTRIBUTES_PREFIX ) )
         {
-            return redirectView( request, VIEW_CREATE_INDICATORHISTORY );
+            Map<String,String> mapParameters = new HashMap<String,String>();
+            mapParameters.put( PARAMETER_KEY , _history.getIndKey() );
+            return redirect( request, VIEW_CREATE_HISTORY , mapParameters );
         }
 
-        IndicatorHistoryHome.create( _history );
-        addInfo( INFO_INDICATORHISTORY_CREATED, getLocale(  ) );
+        try 
+        {
+            IndicatorHistoryHome.create( _history );
+            addInfo( INFO_HISTORY_CREATED, getLocale(  ) );
 
-        Map<String,String> mapParameters = new HashMap<String,String>();
-        mapParameters.put( PARAMETER_KEY , _history.getIndKey() );
-        return redirect( request, VIEW_MANAGE_INDICATORHISTORYS , mapParameters );
+            Map<String,String> mapParameters = new HashMap<String,String>();
+            mapParameters.put( PARAMETER_KEY , _history.getIndKey() );
+            return redirect( request, VIEW_MANAGE_HISTORY , mapParameters );
+        }
+        catch( Exception e )
+        {
+            if( e.getCause() != null )
+            {
+                addError( e.getCause().getMessage() );
+            }
+            else
+            {
+                addError( e.getMessage() );
+            }
+            Map<String,String> mapParameters = new HashMap<String,String>();
+            mapParameters.put( PARAMETER_KEY , _history.getIndKey() );
+            return redirect( request, VIEW_CREATE_HISTORY , mapParameters );
+        }
     }
 
     /**
@@ -165,14 +183,16 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
      * @param request The Http request
      * @return the html code to confirm
      */
-    @Action( ACTION_CONFIRM_REMOVE_INDICATORHISTORY )
+    @Action( ACTION_CONFIRM_REMOVE_HISTORY )
     public String getConfirmRemoveIndicatorHistory( HttpServletRequest request )
     {
-        int nId = Integer.parseInt( request.getParameter( PARAMETER_ID ) );
-        UrlItem url = new UrlItem( getActionUrl( ACTION_REMOVE_INDICATORHISTORY ) );
-        url.addParameter( PARAMETER_ID, nId );
+        String strKey = request.getParameter( PARAMETER_KEY );
+        String strTimecode = request.getParameter( PARAMETER_TIMECODE );
+        UrlItem url = new UrlItem( getActionUrl( ACTION_REMOVE_HISTORY ) );
+        url.addParameter( PARAMETER_KEY, strKey );
+        url.addParameter( PARAMETER_TIMECODE, strTimecode );
 
-        String strMessageUrl = AdminMessageService.getMessageUrl( request, MESSAGE_CONFIRM_REMOVE_INDICATORHISTORY,
+        String strMessageUrl = AdminMessageService.getMessageUrl( request, MESSAGE_CONFIRM_REMOVE_HISTORY,
                 url.getUrl(  ), AdminMessage.TYPE_CONFIRMATION );
 
         return redirect( request, strMessageUrl );
@@ -184,16 +204,17 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
      * @param request The Http request
      * @return the jsp URL to display the form to manage history
      */
-    @Action( ACTION_REMOVE_INDICATORHISTORY )
+    @Action( ACTION_REMOVE_HISTORY )
     public String doRemoveIndicatorHistory( HttpServletRequest request )
     {
-        int nId = Integer.parseInt( request.getParameter( PARAMETER_ID ) );
-        IndicatorHistoryHome.remove( nId );
-        addInfo( INFO_INDICATORHISTORY_REMOVED, getLocale(  ) );
+        String strKey = request.getParameter( PARAMETER_KEY );
+        String strTimecode = request.getParameter( PARAMETER_TIMECODE );
+        IndicatorHistoryHome.remove( strKey , strTimecode );
+        addInfo( INFO_HISTORY_REMOVED, getLocale(  ) );
 
         Map<String,String> mapParameters = new HashMap<String,String>();
         mapParameters.put( PARAMETER_KEY , _history.getIndKey() );
-        return redirect( request, VIEW_MANAGE_INDICATORHISTORYS , mapParameters );
+        return redirect( request, VIEW_MANAGE_HISTORY , mapParameters );
     }
 
     /**
@@ -202,20 +223,21 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
      * @param request The Http request
      * @return The HTML form to update info
      */
-    @View( VIEW_MODIFY_INDICATORHISTORY )
+    @View( VIEW_MODIFY_HISTORY )
     public String getModifyIndicatorHistory( HttpServletRequest request )
     {
-        int nId = Integer.parseInt( request.getParameter( PARAMETER_ID ) );
+        String strKey = request.getParameter( PARAMETER_KEY );
+        String strTimecode = request.getParameter( PARAMETER_TIMECODE );
 
-        if ( ( _history == null ) || ( _history.getId(  ) != nId ) )
+        if ( ( _history == null ) || ( ! _history.getIndKey().equals( strKey )) || ( _history.getTimeCode().equals( strTimecode )) )
         {
-            _history = IndicatorHistoryHome.findByPrimaryKey( nId );
+            _history = IndicatorHistoryHome.findByPrimaryKey( strKey , strTimecode );
         }
 
         Map<String, Object> model = getModel(  );
         model.put( MARK_INDICATORHISTORY, _history );
 
-        return getPage( PROPERTY_PAGE_TITLE_MODIFY_INDICATORHISTORY, TEMPLATE_MODIFY_INDICATORHISTORY, model );
+        return getPage( PROPERTY_PAGE_TITLE_MODIFY_HISTORY, TEMPLATE_MODIFY_HISTORY, model );
     }
 
     /**
@@ -224,7 +246,7 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
      * @param request The Http request
      * @return The Jsp URL of the process result
      */
-    @Action( ACTION_MODIFY_INDICATORHISTORY )
+    @Action( ACTION_MODIFY_HISTORY )
     public String doModifyIndicatorHistory( HttpServletRequest request )
     {
         populate( _history, request );
@@ -232,14 +254,17 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
         // Check constraints
         if ( !validateBean( _history, VALIDATION_ATTRIBUTES_PREFIX ) )
         {
-            return redirect( request, VIEW_MODIFY_INDICATORHISTORY, PARAMETER_ID, _history.getId(  ) );
+            Map<String,String> mapParameters = new HashMap<String,String>();
+            mapParameters.put( PARAMETER_KEY , _history.getIndKey() );
+            mapParameters.put( PARAMETER_TIMECODE, _history.getTimeCode() );
+            return redirect( request, VIEW_MODIFY_HISTORY, mapParameters );
         }
 
         IndicatorHistoryHome.update( _history );
-        addInfo( INFO_INDICATORHISTORY_UPDATED, getLocale(  ) );
+        addInfo( INFO_HISTORY_UPDATED, getLocale(  ) );
 
         Map<String,String> mapParameters = new HashMap<String,String>();
         mapParameters.put( PARAMETER_KEY , _history.getIndKey() );
-        return redirect( request, VIEW_MANAGE_INDICATORHISTORYS , mapParameters );
+        return redirect( request, VIEW_MANAGE_HISTORY , mapParameters );
     }
 }

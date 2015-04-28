@@ -48,6 +48,7 @@ public final class IndicatorDAO implements IIndicatorDAO
     // Constants
     private static final String SQL_QUERY_NEW_PK = "SELECT max( id_indicator ) FROM indicator_key";
     private static final String SQL_QUERY_SELECT = "SELECT id_indicator, ind_key, label, description, ind_value, ind_target, history_period FROM indicator_key WHERE id_indicator = ?";
+    private static final String SQL_QUERY_SELECT_BY_KEY = "SELECT id_indicator, ind_key, label, description, ind_value, ind_target, history_period FROM indicator_key WHERE ind_key = ?";
     private static final String SQL_QUERY_INSERT = "INSERT INTO indicator_key ( id_indicator, ind_key, label, description, ind_value, ind_target, history_period ) VALUES ( ?, ?, ?, ?, ?, ?, ? ) ";
     private static final String SQL_QUERY_DELETE = "DELETE FROM indicator_key WHERE id_indicator = ? ";
     private static final String SQL_QUERY_UPDATE = "UPDATE indicator_key SET id_indicator = ?, ind_key = ?, label = ?, description = ?, ind_value = ?, ind_target = ?, history_period = ? WHERE id_indicator = ?";
@@ -106,6 +107,35 @@ public final class IndicatorDAO implements IIndicatorDAO
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT, plugin );
         daoUtil.setInt( 1, nKey );
+        daoUtil.executeQuery(  );
+
+        Indicator indicator = null;
+
+        if ( daoUtil.next(  ) )
+        {
+            indicator = new Indicator(  );
+            indicator.setId( daoUtil.getInt( 1 ) );
+            indicator.setIndKey( daoUtil.getString( 2 ) );
+            indicator.setLabel( daoUtil.getString( 3 ) );
+            indicator.setDescription( daoUtil.getString( 4 ) );
+            indicator.setIndValue( daoUtil.getInt( 5 ) );
+            indicator.setIndTarget( daoUtil.getInt( 6 ) );
+            indicator.setHistoryPeriod( daoUtil.getString( 7 ) );
+        }
+
+        daoUtil.free(  );
+
+        return indicator;
+    }
+
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public Indicator loadByKey( String strKey, Plugin plugin )
+    {
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_BY_KEY, plugin );
+        daoUtil.setString( 1, strKey );
         daoUtil.executeQuery(  );
 
         Indicator indicator = null;

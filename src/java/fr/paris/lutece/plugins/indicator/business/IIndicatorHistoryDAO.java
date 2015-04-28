@@ -59,21 +59,23 @@ public interface IIndicatorHistoryDAO
 
     /**
      * Delete a record from the table
-     * @param nKey The identifier of the IndicatorHistory to delete
+     * @param strKey The identifier of the indicatorHistory
+     * @param strTimeCode The time code
      * @param plugin the Plugin
      */
-    void delete( int nKey, Plugin plugin );
+    void delete( String strKey, String strTimeCode, Plugin plugin );
 
     ///////////////////////////////////////////////////////////////////////////
     // Finders
 
     /**
      * Load the data from the table
-     * @param nKey The identifier of the indicatorHistory
+     * @param strKey The identifier of the indicatorHistory
+     * @param strTimeCode The time code
      * @param plugin the Plugin
      * @return The instance of the indicatorHistory
      */
-    IndicatorHistory load( int nKey, Plugin plugin );
+    IndicatorHistory load( String strKey, String strTimeCode, Plugin plugin );
 
     /**
      * Load the data of all the indicatorHistory objects and returns them as a collection

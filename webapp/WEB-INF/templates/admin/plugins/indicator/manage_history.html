@@ -39,12 +39,12 @@
                 ${history.indTarget}
             </td>
         <td>
-            <a href="jsp/admin/plugins/indicator/ManageHistory.jsp?view=modifyIndicatorHistory&id=${history.id}"
+            <a href="jsp/admin/plugins/indicator/ManageHistory.jsp?view=modifyIndicatorHistory&key=${history.indKey}&amp;timecode=${history.timeCode}"
                class="btn btn-primary btn-small" title="#i18n{portal.util.labelModify}">
                 <i class="fa fa-pencil"></i>
             </a>
 
-            <a href="jsp/admin/plugins/indicator/ManageHistory.jsp?action=confirmRemoveIndicatorHistory&id=${history.id}"
+            <a href="jsp/admin/plugins/indicator/ManageHistory.jsp?action=confirmRemoveIndicatorHistory&key=${history.indKey}&amp;timecode=${history.timeCode}"
                class="btn btn-danger btn-small" title="#i18n{portal.util.labelDelete}" >
                 <i class="fa fa-trash"></i>
             </a>

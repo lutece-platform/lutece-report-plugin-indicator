@@ -46,34 +46,11 @@ import java.util.Collection;
 public final class IndicatorHistoryDAO implements IIndicatorHistoryDAO
 {
     // Constants
-    private static final String SQL_QUERY_NEW_PK = "SELECT max( id_history ) FROM indicator_history";
-    private static final String SQL_QUERY_SELECT = "SELECT id_history, ind_key, time_code, ind_value, ind_target FROM indicator_history WHERE id_history = ?";
-    private static final String SQL_QUERY_INSERT = "INSERT INTO indicator_history ( id_history, ind_key, time_code, ind_value, ind_target ) VALUES ( ?, ?, ?, ?, ? ) ";
-    private static final String SQL_QUERY_DELETE = "DELETE FROM indicator_history WHERE id_history = ? ";
-    private static final String SQL_QUERY_UPDATE = "UPDATE indicator_history SET id_history = ?, ind_key = ?, time_code = ?, ind_value = ?, ind_target = ? WHERE id_history = ?";
-    private static final String SQL_QUERY_SELECTALL = "SELECT id_history, ind_key, time_code, ind_value, ind_target FROM indicator_history WHERE ind_key = ?";
-
-    /**
-     * Generates a new primary key
-     * @param plugin The Plugin
-     * @return The new primary key
-     */
-    public int newPrimaryKey( Plugin plugin )
-    {
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_NEW_PK, plugin );
-        daoUtil.executeQuery(  );
-
-        int nKey = 1;
-
-        if ( daoUtil.next(  ) )
-        {
-            nKey = daoUtil.getInt( 1 ) + 1;
-        }
-
-        daoUtil.free(  );
-
-        return nKey;
-    }
+    private static final String SQL_QUERY_SELECT = "SELECT ind_key, time_code, ind_value, ind_target FROM indicator_history WHERE ind_key = ? AND time_code = ?";
+    private static final String SQL_QUERY_INSERT = "INSERT INTO indicator_history ( ind_key, time_code, ind_value, ind_target ) VALUES ( ?, ?, ?, ? ) ";
+    private static final String SQL_QUERY_DELETE = "DELETE FROM indicator_history WHERE ind_key = ? AND time_code = ? ";
+    private static final String SQL_QUERY_UPDATE = "UPDATE indicator_history SET ind_key = ?, time_code = ?, ind_value = ?, ind_target = ? WHERE ind_key = ? AND time_code = ?";
+    private static final String SQL_QUERY_SELECTALL = "SELECT ind_key, time_code, ind_value, ind_target FROM indicator_history WHERE ind_key = ?";
 
     /**
      * {@inheritDoc }
@@ -83,13 +60,10 @@ public final class IndicatorHistoryDAO implements IIndicatorHistoryDAO
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, plugin );
 
-        indicatorHistory.setId( newPrimaryKey( plugin ) );
-
-        daoUtil.setInt( 1, indicatorHistory.getId(  ) );
-        daoUtil.setString( 2, indicatorHistory.getIndKey(  ) );
-        daoUtil.setInt( 3, indicatorHistory.getTimeCode(  ) );
-        daoUtil.setInt( 4, indicatorHistory.getIndValue(  ) );
-        daoUtil.setInt( 5, indicatorHistory.getIndTarget(  ) );
+        daoUtil.setString( 1, indicatorHistory.getIndKey(  ) );
+        daoUtil.setString( 2, indicatorHistory.getTimeCode(  ) );
+        daoUtil.setInt( 3, indicatorHistory.getIndValue(  ) );
+        daoUtil.setInt( 4, indicatorHistory.getIndTarget(  ) );
 
         daoUtil.executeUpdate(  );
         daoUtil.free(  );
@@ -99,10 +73,11 @@ public final class IndicatorHistoryDAO implements IIndicatorHistoryDAO
      * {@inheritDoc }
      */
     @Override
-    public IndicatorHistory load( int nKey, Plugin plugin )
+    public IndicatorHistory load( String strKey, String strTimeCode, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT, plugin );
-        daoUtil.setInt( 1, nKey );
+        daoUtil.setString( 1, strKey );
+        daoUtil.setString( 2, strTimeCode );
         daoUtil.executeQuery(  );
 
         IndicatorHistory indicatorHistory = null;
@@ -110,11 +85,10 @@ public final class IndicatorHistoryDAO implements IIndicatorHistoryDAO
         if ( daoUtil.next(  ) )
         {
             indicatorHistory = new IndicatorHistory(  );
-            indicatorHistory.setId( daoUtil.getInt( 1 ) );
-            indicatorHistory.setIndKey( daoUtil.getString( 2 ) );
-            indicatorHistory.setTimeCode( daoUtil.getInt( 3 ) );
-            indicatorHistory.setIndValue( daoUtil.getInt( 4 ) );
-            indicatorHistory.setIndTarget( daoUtil.getInt( 5 ) );
+            indicatorHistory.setIndKey( daoUtil.getString( 1 ) );
+            indicatorHistory.setTimeCode( daoUtil.getString( 2 ) );
+            indicatorHistory.setIndValue( daoUtil.getInt( 3 ) );
+            indicatorHistory.setIndTarget( daoUtil.getInt( 4 ) );
         }
 
         daoUtil.free(  );
@@ -126,10 +100,11 @@ public final class IndicatorHistoryDAO implements IIndicatorHistoryDAO
      * {@inheritDoc }
      */
     @Override
-    public void delete( int nKey, Plugin plugin )
+    public void delete( String strKey, String strTimeCode, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_DELETE, plugin );
-        daoUtil.setInt( 1, nKey );
+        daoUtil.setString( 1, strKey );
+        daoUtil.setString( 2, strTimeCode );
         daoUtil.executeUpdate(  );
         daoUtil.free(  );
     }
@@ -142,12 +117,12 @@ public final class IndicatorHistoryDAO implements IIndicatorHistoryDAO
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_UPDATE, plugin );
 
-        daoUtil.setInt( 1, indicatorHistory.getId(  ) );
-        daoUtil.setString( 2, indicatorHistory.getIndKey(  ) );
-        daoUtil.setInt( 3, indicatorHistory.getTimeCode(  ) );
-        daoUtil.setInt( 4, indicatorHistory.getIndValue(  ) );
-        daoUtil.setInt( 5, indicatorHistory.getIndTarget(  ) );
-        daoUtil.setInt( 6, indicatorHistory.getId(  ) );
+        daoUtil.setString( 1, indicatorHistory.getIndKey(  ) );
+        daoUtil.setString( 2, indicatorHistory.getTimeCode(  ) );
+        daoUtil.setInt( 3, indicatorHistory.getIndValue(  ) );
+        daoUtil.setInt( 4, indicatorHistory.getIndTarget(  ) );
+        daoUtil.setString( 5, indicatorHistory.getIndKey() );
+        daoUtil.setString( 6, indicatorHistory.getTimeCode() );
 
         daoUtil.executeUpdate(  );
         daoUtil.free(  );
@@ -168,11 +143,10 @@ public final class IndicatorHistoryDAO implements IIndicatorHistoryDAO
         {
             IndicatorHistory indicatorHistory = new IndicatorHistory(  );
 
-            indicatorHistory.setId( daoUtil.getInt( 1 ) );
-            indicatorHistory.setIndKey( daoUtil.getString( 2 ) );
-            indicatorHistory.setTimeCode( daoUtil.getInt( 3 ) );
-            indicatorHistory.setIndValue( daoUtil.getInt( 4 ) );
-            indicatorHistory.setIndTarget( daoUtil.getInt( 5 ) );
+            indicatorHistory.setIndKey( daoUtil.getString( 1 ) );
+            indicatorHistory.setTimeCode( daoUtil.getString( 2 ) );
+            indicatorHistory.setIndValue( daoUtil.getInt( 3 ) );
+            indicatorHistory.setIndTarget( daoUtil.getInt( 4 ) );
 
             indicatorHistoryList.add( indicatorHistory );
         }

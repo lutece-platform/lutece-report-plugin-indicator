@@ -82,11 +82,12 @@ public final class IndicatorHistoryHome
 
     /**
      * Remove the indicatorHistory whose identifier is specified in parameter
-     * @param nKey The indicatorHistory Id
+     * @param strKey The Key
+     * @param strTimeCode  The Timecode
      */
-    public static void remove( int nKey )
+    public static void remove( String strKey , String strTimeCode )
     {
-        _dao.delete( nKey, _plugin );
+        _dao.delete( strKey, strTimeCode, _plugin );
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -94,12 +95,13 @@ public final class IndicatorHistoryHome
 
     /**
      * Returns an instance of a indicatorHistory whose identifier is specified in parameter
-     * @param nKey The indicatorHistory primary key
+     * @param strKey The Key
+     * @param strTimeCode  The Timecode
      * @return an instance of IndicatorHistory
      */
-    public static IndicatorHistory findByPrimaryKey( int nKey )
+    public static IndicatorHistory findByPrimaryKey( String strKey , String strTimeCode )
     {
-        return _dao.load( nKey, _plugin );
+        return _dao.load( strKey, strTimeCode, _plugin );
     }
 
     /**

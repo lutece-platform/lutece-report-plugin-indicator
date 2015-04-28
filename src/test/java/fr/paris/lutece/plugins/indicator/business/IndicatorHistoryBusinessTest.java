@@ -39,9 +39,7 @@ import fr.paris.lutece.test.LuteceTestCase;
 public class IndicatorHistoryBusinessTest extends LuteceTestCase
 {
     private final static String INDKEY1 = "IndKey1";
-    private final static String INDKEY2 = "IndKey2";
-    private final static int TIMECODE1 = 1;
-    private final static int TIMECODE2 = 2;
+    private final static String TIMECODE1 = "001";
     private final static int INDVALUE1 = 1;
     private final static int INDVALUE2 = 2;
     private final static int INDTARGET1 = 1;
@@ -50,39 +48,37 @@ public class IndicatorHistoryBusinessTest extends LuteceTestCase
     public void testBusiness(  )
     {
         // Initialize an object
-        IndicatorHistory indicatorHistory = new IndicatorHistory(  );
-        indicatorHistory.setIndKey( INDKEY1 );
-        indicatorHistory.setTimeCode( TIMECODE1 );
-        indicatorHistory.setIndValue( INDVALUE1 );
-        indicatorHistory.setIndTarget( INDTARGET1 );
+        IndicatorHistory history = new IndicatorHistory(  );
+        history.setIndKey( INDKEY1 );
+        history.setTimeCode( TIMECODE1 );
+        history.setIndValue( INDVALUE1 );
+        history.setIndTarget( INDTARGET1 );
 
         // Create test
-        IndicatorHistoryHome.create( indicatorHistory );
+        IndicatorHistoryHome.create( history );
 
-        IndicatorHistory indicatorHistoryStored = IndicatorHistoryHome.findByPrimaryKey( indicatorHistory.getId(  ) );
-        assertEquals( indicatorHistoryStored.getIndKey(  ), indicatorHistory.getIndKey(  ) );
-        assertEquals( indicatorHistoryStored.getTimeCode(  ), indicatorHistory.getTimeCode(  ) );
-        assertEquals( indicatorHistoryStored.getIndValue(  ), indicatorHistory.getIndValue(  ) );
-        assertEquals( indicatorHistoryStored.getIndTarget(  ), indicatorHistory.getIndTarget(  ) );
+        IndicatorHistory historyStored = IndicatorHistoryHome.findByPrimaryKey( history.getIndKey() , history.getTimeCode() );
+        assertEquals( historyStored.getIndKey(  ), history.getIndKey(  ) );
+        assertEquals( historyStored.getTimeCode(  ), history.getTimeCode(  ) );
+        assertEquals( historyStored.getIndValue(  ), history.getIndValue(  ) );
+        assertEquals( historyStored.getIndTarget(  ), history.getIndTarget(  ) );
 
         // Update test
-        indicatorHistory.setIndKey( INDKEY2 );
-        indicatorHistory.setTimeCode( TIMECODE2 );
-        indicatorHistory.setIndValue( INDVALUE2 );
-        indicatorHistory.setIndTarget( INDTARGET2 );
-        IndicatorHistoryHome.update( indicatorHistory );
-        indicatorHistoryStored = IndicatorHistoryHome.findByPrimaryKey( indicatorHistory.getId(  ) );
-        assertEquals( indicatorHistoryStored.getIndKey(  ), indicatorHistory.getIndKey(  ) );
-        assertEquals( indicatorHistoryStored.getTimeCode(  ), indicatorHistory.getTimeCode(  ) );
-        assertEquals( indicatorHistoryStored.getIndValue(  ), indicatorHistory.getIndValue(  ) );
-        assertEquals( indicatorHistoryStored.getIndTarget(  ), indicatorHistory.getIndTarget(  ) );
+        history.setIndValue( INDVALUE2 );
+        history.setIndTarget( INDTARGET2 );
+        IndicatorHistoryHome.update( history );
+        historyStored = IndicatorHistoryHome.findByPrimaryKey( history.getIndKey() , history.getTimeCode() );
+        assertEquals( historyStored.getIndKey(  ), history.getIndKey(  ) );
+        assertEquals( historyStored.getTimeCode(  ), history.getTimeCode(  ) );
+        assertEquals( historyStored.getIndValue(  ), history.getIndValue(  ) );
+        assertEquals( historyStored.getIndTarget(  ), history.getIndTarget(  ) );
 
         // List test
         IndicatorHistoryHome.getIndicatorHistorysList( INDKEY1 );
 
         // Delete test
-        IndicatorHistoryHome.remove( indicatorHistory.getId(  ) );
-        indicatorHistoryStored = IndicatorHistoryHome.findByPrimaryKey( indicatorHistory.getId(  ) );
-        assertNull( indicatorHistoryStored );
+        IndicatorHistoryHome.remove( history.getIndKey() , history.getTimeCode() );
+        historyStored = IndicatorHistoryHome.findByPrimaryKey( history.getIndKey() , history.getTimeCode() );
+        assertNull( historyStored );
     }
 }
