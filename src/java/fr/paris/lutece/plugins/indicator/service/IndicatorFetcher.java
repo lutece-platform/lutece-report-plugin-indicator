@@ -34,6 +34,7 @@
 package fr.paris.lutece.plugins.indicator.service;
 
 import fr.paris.lutece.plugins.indicator.business.Indicator;
+import fr.paris.lutece.portal.service.util.LuteceService;
 
 import java.util.List;
 
@@ -41,7 +42,7 @@ import java.util.List;
 /**
  * Indicator Fetcher interface
  */
-public interface IndicatorFetcher
+public interface IndicatorFetcher extends LuteceService
 {
     /**
      * Return a list of indicator with their values updated

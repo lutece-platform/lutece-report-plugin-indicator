@@ -30,6 +30,16 @@
             <feature-icon-url></feature-icon-url>
       </admin-feature>
     </admin-features>    
+    
+    <!-- Daemons -->
+    <daemons>
+        <daemon>
+            <daemon-id>indicatorUpdater</daemon-id>
+            <daemon-name>indicator.daemon.indicatorUpdater.name</daemon-name>
+            <daemon-description>indicator.daemon.indicatorUpdater.description</daemon-description>
+            <daemon-class>fr.paris.lutece.plugins.indicator.service.IndicatorUpdaterDaemon</daemon-class>
+        </daemon>
+    </daemons>    
 
     <!-- XPages parameters -->
     <applications>

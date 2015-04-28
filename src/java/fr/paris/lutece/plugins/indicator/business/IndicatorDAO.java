@@ -51,7 +51,7 @@ public final class IndicatorDAO implements IIndicatorDAO
     private static final String SQL_QUERY_INSERT = "INSERT INTO indicator_key ( id_indicator, ind_key, label, description, ind_value, ind_target, history_period ) VALUES ( ?, ?, ?, ?, ?, ?, ? ) ";
     private static final String SQL_QUERY_DELETE = "DELETE FROM indicator_key WHERE id_indicator = ? ";
     private static final String SQL_QUERY_UPDATE = "UPDATE indicator_key SET id_indicator = ?, ind_key = ?, label = ?, description = ?, ind_value = ?, ind_target = ?, history_period = ? WHERE id_indicator = ?";
-    private static final String SQL_QUERY_UPDATE_VALUE = "UPDATE indicator_key SET ind_value = ? WHERE id_ind_key = ?";
+    private static final String SQL_QUERY_UPDATE_VALUE = "UPDATE indicator_key SET ind_value = ? WHERE ind_key = ?";
     private static final String SQL_QUERY_SELECTALL = "SELECT id_indicator, ind_key, label, description, ind_value, ind_target, history_period FROM indicator_key";
 
     /**
