@@ -34,6 +34,8 @@
 package fr.paris.lutece.plugins.indicator.service;
 
 import fr.paris.lutece.plugins.indicator.business.Indicator;
+import fr.paris.lutece.plugins.indicator.business.IndicatorHistory;
+import fr.paris.lutece.plugins.indicator.business.IndicatorHistoryHome;
 import fr.paris.lutece.plugins.indicator.business.IndicatorHome;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
 import fr.paris.lutece.portal.service.util.AppLogService;
@@ -84,6 +86,8 @@ public class IndicatorUpdaterService
                     IndicatorHome.updateValue( indicator );
                     sbLogs.append( "Indicator '" ).append( indicator.getIndKey(  ) ).append( "' updated. New value is : " )
                           .append( indicator.getValue(  ) ).append( "\n" );
+                    
+                    createHistory( indicator );
                 }
             }
             catch ( Exception e )
@@ -93,5 +97,24 @@ public class IndicatorUpdaterService
         }
 
         return sbLogs.toString(  );
+    }
+
+    private void createHistory(Indicator indicator)
+    {
+        Indicator indicatorFull = IndicatorHome.findByKey( indicator.getIndKey() );
+        String strTimeCode = TimeCodeService.getCurrentTimeCode( indicatorFull.getHistoryPeriod() );
+
+        IndicatorHistory history = IndicatorHistoryHome.findByPrimaryKey( indicator.getIndKey(), strTimeCode);
+        if( history != null )
+        {
+            IndicatorHistoryHome.remove( indicator.getIndKey(), strTimeCode );
+        }
+
+        history = new IndicatorHistory();
+        history.setIndKey( indicator.getIndKey() );
+        history.setTimeCode( strTimeCode );
+        history.setIndValue( indicator.getValue() );
+        history.setIndTarget( indicator.getIndTarget() );
+        IndicatorHistoryHome.create( history );
     }
 }

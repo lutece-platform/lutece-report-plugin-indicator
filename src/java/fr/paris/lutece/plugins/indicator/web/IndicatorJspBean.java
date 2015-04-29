@@ -35,6 +35,7 @@ package fr.paris.lutece.plugins.indicator.web;
 
 import fr.paris.lutece.plugins.indicator.business.Indicator;
 import fr.paris.lutece.plugins.indicator.business.IndicatorHome;
+import fr.paris.lutece.plugins.indicator.service.TimeCodeService;
 import fr.paris.lutece.portal.service.message.AdminMessage;
 import fr.paris.lutece.portal.service.message.AdminMessageService;
 import fr.paris.lutece.portal.util.mvc.admin.annotations.Controller;
@@ -73,11 +74,11 @@ public class IndicatorJspBean extends ManageIndicatorJspBean
     // Markers
     private static final String MARK_INDICATOR_LIST = "indicator_list";
     private static final String MARK_INDICATOR = "indicator";
+    private static final String MARK_PERIODS_LIST = "periods_list";
     private static final String JSP_MANAGE_INDICATORS = "jsp/admin/plugins/indicator/ManageIndicators.jsp";
 
     // Properties
     private static final String MESSAGE_CONFIRM_REMOVE_INDICATOR = "indicator.message.confirmRemoveIndicator";
-    private static final String PROPERTY_DEFAULT_LIST_INDICATOR_PER_PAGE = "indicator.listIndicators.itemsPerPage";
     private static final String VALIDATION_ATTRIBUTES_PREFIX = "indicator.model.entity.indicator.attribute.";
 
     // Views
@@ -124,6 +125,7 @@ public class IndicatorJspBean extends ManageIndicatorJspBean
 
         Map<String, Object> model = getModel(  );
         model.put( MARK_INDICATOR, _indicator );
+        model.put( MARK_PERIODS_LIST , TimeCodeService.getPeriod( getLocale() ));
 
         return getPage( PROPERTY_PAGE_TITLE_CREATE_INDICATOR, TEMPLATE_CREATE_INDICATOR, model );
     }
@@ -205,6 +207,7 @@ public class IndicatorJspBean extends ManageIndicatorJspBean
 
         Map<String, Object> model = getModel(  );
         model.put( MARK_INDICATOR, _indicator );
+        model.put( MARK_PERIODS_LIST , TimeCodeService.getPeriod( getLocale() ));
 
         return getPage( PROPERTY_PAGE_TITLE_MODIFY_INDICATOR, TEMPLATE_MODIFY_INDICATOR, model );
     }
