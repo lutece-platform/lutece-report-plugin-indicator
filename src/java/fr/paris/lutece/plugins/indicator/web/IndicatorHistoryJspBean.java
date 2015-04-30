@@ -213,7 +213,7 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
         addInfo( INFO_HISTORY_REMOVED, getLocale(  ) );
 
         Map<String,String> mapParameters = new HashMap<String,String>();
-        mapParameters.put( PARAMETER_KEY , _history.getIndKey() );
+        mapParameters.put( PARAMETER_KEY , strKey );
         return redirect( request, VIEW_MANAGE_HISTORY , mapParameters );
     }
 

@@ -114,7 +114,15 @@ public class IndicatorUpdaterService
         history.setIndKey( indicator.getIndKey() );
         history.setTimeCode( strTimeCode );
         history.setIndValue( indicator.getValue() );
-        history.setIndTarget( indicator.getIndTarget() );
+        if( indicator.getIndTarget() != 0 )
+        {    
+            history.setIndTarget( indicator.getIndTarget() );
+        }
+        else
+        {
+            history.setIndTarget( indicatorFull.getIndTarget() );
+        }
+        
         IndicatorHistoryHome.create( history );
     }
 }
