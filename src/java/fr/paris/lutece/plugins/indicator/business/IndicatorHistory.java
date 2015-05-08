@@ -33,16 +33,20 @@
  */
 package fr.paris.lutece.plugins.indicator.business;
 
-import org.hibernate.validator.constraints.*;
+import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Size;
+
+import java.io.Serializable;
 
 
 /**
  * This is the business class for the object IndicatorHistory
  */
-public class IndicatorHistory
+public class IndicatorHistory implements Serializable
 {
+    private static final long serialVersionUID = 1L;
+    
     // Variables declarations 
     @NotEmpty( message = "#i18n{indicator.validation.history.IndKey.notEmpty}" )
     @Size( max = 50, message = "#i18n{indicator.validation.history.IndKey.size}" )

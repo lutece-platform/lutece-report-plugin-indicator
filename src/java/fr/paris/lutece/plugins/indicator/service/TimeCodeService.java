@@ -44,7 +44,7 @@ import java.util.Locale;
 /**
  * TimeCodeService
  */
-public class TimeCodeService
+public final class TimeCodeService
 {
     public static final String PERIOD_DAY = "D";
     public static final String PERIOD_WEEK = "W";
@@ -57,6 +57,13 @@ public class TimeCodeService
     private static final String KEY_I18N_MONTH = "indicator.period_label.month";
     private static final String INVALID_TIME_CODE = "000000";
 
+    /** Private constructor */
+    private TimeCodeService()
+    {
+        
+    }
+    
+    
     /**
      * Build a time code for the current date
      * @param strPeriod The Period to define the timecode format

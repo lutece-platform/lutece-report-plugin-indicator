@@ -42,9 +42,9 @@ import fr.paris.lutece.portal.util.mvc.commons.annotations.Action;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
 import fr.paris.lutece.util.url.UrlItem;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -149,7 +149,7 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
         // Check constraints
         if ( !validateBean( _history, VALIDATION_ATTRIBUTES_PREFIX ) )
         {
-            Map<String, String> mapParameters = new HashMap<String, String>(  );
+            Map<String, String> mapParameters = new ConcurrentHashMap<String, String>(  );
             mapParameters.put( PARAMETER_KEY, _history.getIndKey(  ) );
 
             return redirect( request, VIEW_CREATE_HISTORY, mapParameters );
@@ -160,7 +160,7 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
             IndicatorHistoryHome.create( _history );
             addInfo( INFO_HISTORY_CREATED, getLocale(  ) );
 
-            Map<String, String> mapParameters = new HashMap<String, String>(  );
+            Map<String, String> mapParameters = new ConcurrentHashMap<String, String>(  );
             mapParameters.put( PARAMETER_KEY, _history.getIndKey(  ) );
 
             return redirect( request, VIEW_MANAGE_HISTORY, mapParameters );
@@ -176,7 +176,7 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
                 addError( e.getMessage(  ) );
             }
 
-            Map<String, String> mapParameters = new HashMap<String, String>(  );
+            Map<String, String> mapParameters = new ConcurrentHashMap<String, String>(  );
             mapParameters.put( PARAMETER_KEY, _history.getIndKey(  ) );
 
             return redirect( request, VIEW_CREATE_HISTORY, mapParameters );
@@ -219,7 +219,7 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
         IndicatorHistoryHome.remove( strKey, strTimecode );
         addInfo( INFO_HISTORY_REMOVED, getLocale(  ) );
 
-        Map<String, String> mapParameters = new HashMap<String, String>(  );
+        Map<String, String> mapParameters = new ConcurrentHashMap<String, String>(  );
         mapParameters.put( PARAMETER_KEY, strKey );
 
         return redirect( request, VIEW_MANAGE_HISTORY, mapParameters );
@@ -263,7 +263,7 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
         // Check constraints
         if ( !validateBean( _history, VALIDATION_ATTRIBUTES_PREFIX ) )
         {
-            Map<String, String> mapParameters = new HashMap<String, String>(  );
+            Map<String, String> mapParameters = new ConcurrentHashMap<String, String>(  );
             mapParameters.put( PARAMETER_KEY, _history.getIndKey(  ) );
             mapParameters.put( PARAMETER_TIMECODE, _history.getTimeCode(  ) );
 
@@ -273,7 +273,7 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
         IndicatorHistoryHome.update( _history );
         addInfo( INFO_HISTORY_UPDATED, getLocale(  ) );
 
-        Map<String, String> mapParameters = new HashMap<String, String>(  );
+        Map<String, String> mapParameters = new ConcurrentHashMap<String, String>(  );
         mapParameters.put( PARAMETER_KEY, _history.getIndKey(  ) );
 
         return redirect( request, VIEW_MANAGE_HISTORY, mapParameters );

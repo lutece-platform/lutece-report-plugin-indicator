@@ -51,7 +51,7 @@ public class IndicatorUpdaterService
     private static List<IndicatorFetcher> _listFetchers;
     private static IndicatorUpdaterService _singleton;
 
-    public static IndicatorUpdaterService instance(  )
+    public static synchronized IndicatorUpdaterService instance(  )
     {
         if ( _singleton == null )
         {
@@ -86,7 +86,7 @@ public class IndicatorUpdaterService
                 {
                     IndicatorHome.updateValue( indicator );
                     sbLogs.append( "Indicator '" ).append( indicator.getIndKey(  ) ).append( "' updated. New value is : " )
-                          .append( indicator.getValue(  ) ).append( "\n" );
+                          .append( indicator.getValue(  ) ).append( '\n' );
 
                     createHistory( indicator );
                 }
