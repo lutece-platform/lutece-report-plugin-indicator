@@ -8,7 +8,7 @@
         <@fieldInputText i18nLabelKey="indicator.create_indicator.labelDescription" inputName="description" mandatory=true value="${indicator.description!''}" i18nHelpBlockKey="indicator.create_indicator.labelDescription.help" />
         <@fieldInputText i18nLabelKey="indicator.create_indicator.labelIndValue" inputName="ind_value" mandatory=true value="${indicator.indValue!''}" i18nHelpBlockKey="indicator.create_indicator.labelIndValue.help" />
         <@fieldInputText i18nLabelKey="indicator.create_indicator.labelIndTarget" inputName="ind_target"  value="${indicator.indTarget!''}" i18nHelpBlockKey="indicator.create_indicator.labelIndTarget.help" />
-        <@fieldInputText i18nLabelKey="indicator.create_indicator.labelHistoryPeriod" inputName="history_period" mandatory=true value="${indicator.historyPeriod!''}" i18nHelpBlockKey="indicator.create_indicator.labelHistoryPeriod.help" />
+        <@fieldInputCombo i18nLabelKey="indicator.create_indicator.labelHistoryPeriod" inputName="history_period" value="${indicator.historyPeriod!''}" items=periods_list i18nHelpBlockKey="indicator.create_indicator.labelHistoryPeriod.help"/>
         <@actionButtons button1Name="action_createIndicator" button2Name="view_manageIndicators"/>
     </form>
 </@rowBoxHeader>

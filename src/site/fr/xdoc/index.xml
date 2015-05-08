@@ -5,19 +5,16 @@
     </properties>
     <body>
         <section name="Plugin indicator">
-            <!--
-            <p>
-                <img src="images/indicator.png" />
-            </p>
-            -->
             <subsection name="Introduction">
-                <p></p>
-            </subsection>
-            <subsection name="Configuration">
-                <p></p>
-            </subsection>
-            <subsection name="Usage">
-                <p></p>
+                <p>Ce plugin vous permet de gérer une base de données d'indicateurs avec une historique de valeurs.</p>
+
+                <p>L'historique est géré selon plusieurs schéma (jour, semaine, mois).</p>
+
+                <p>Une API IndicatorFetcher permet de définir des composants chargés de mettre à jour les valeurs des indicateurs.  </p>
+
+                <p>Ces composants sont détectés automatiquement à partir du moment où ils sont déclarés dans un fichier de contexte Spring.</p>
+
+                <p>Un daemon appelle à interval périodique ces composants. </p>
             </subsection>
         </section>
     </body>

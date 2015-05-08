@@ -33,8 +33,11 @@
  */
 package fr.paris.lutece.plugins.indicator.service;
 
+import fr.paris.lutece.portal.service.i18n.I18nService;
+import fr.paris.lutece.util.ReferenceList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 
 /**
@@ -48,8 +51,18 @@ public class TimeCodeService
     private static final String FORMAT_DAY = "%04d-%02d-%02d";
     private static final String FORMAT_WEEK = "%04d-W%02d";
     private static final String FORMAT_MONTH = "%04d-%02d";
+    
+    private static final String KEY_I18N_DAY = "indicator.period_label.day";
+    private static final String KEY_I18N_WEEK = "indicator.period_label.week";
+    private static final String KEY_I18N_MONTH = "indicator.period_label.month";
+    
     private static final String INVALID_TIME_CODE = "000000";
 
+    /**
+     * Build a time code for the current date
+     * @param strPeriod The Period to define the timecode format 
+     * @return The time code
+     */
     public static String getCurrentTimeCode( String strPeriod )
     {
         String strTimeCode = INVALID_TIME_CODE;
@@ -77,4 +90,22 @@ public class TimeCodeService
 
         return strTimeCode;
     }
+    
+    /**
+     * Returns a list of all available periods
+     * @param locale The Locale
+     * @return The list
+     */
+    public static ReferenceList getPeriod( Locale locale )
+    {
+        ReferenceList list = new ReferenceList();
+        
+        list.addItem( PERIOD_DAY, I18nService.getLocalizedString( KEY_I18N_DAY , locale));
+        list.addItem( PERIOD_WEEK, I18nService.getLocalizedString( KEY_I18N_WEEK , locale));
+        list.addItem( PERIOD_MONTH, I18nService.getLocalizedString( KEY_I18N_MONTH , locale));
+        
+        return list;
+        
+    }
+    
 }
