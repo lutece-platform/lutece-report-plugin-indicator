@@ -126,7 +126,7 @@ public class IndicatorJspBean extends ManageIndicatorJspBean
 
         Map<String, Object> model = getModel(  );
         model.put( MARK_INDICATOR, _indicator );
-        model.put( MARK_PERIODS_LIST , TimeCodeService.getPeriod( getLocale() ));
+        model.put( MARK_PERIODS_LIST, TimeCodeService.getPeriod( getLocale(  ) ) );
 
         return getPage( PROPERTY_PAGE_TITLE_CREATE_INDICATOR, TEMPLATE_CREATE_INDICATOR, model );
     }
@@ -208,7 +208,7 @@ public class IndicatorJspBean extends ManageIndicatorJspBean
 
         Map<String, Object> model = getModel(  );
         model.put( MARK_INDICATOR, _indicator );
-        model.put( MARK_PERIODS_LIST , TimeCodeService.getPeriod( getLocale() ));
+        model.put( MARK_PERIODS_LIST, TimeCodeService.getPeriod( getLocale(  ) ) );
 
         return getPage( PROPERTY_PAGE_TITLE_MODIFY_INDICATOR, TEMPLATE_MODIFY_INDICATOR, model );
     }

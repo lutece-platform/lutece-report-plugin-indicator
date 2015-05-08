@@ -87,7 +87,7 @@ public class IndicatorUpdaterService
                     IndicatorHome.updateValue( indicator );
                     sbLogs.append( "Indicator '" ).append( indicator.getIndKey(  ) ).append( "' updated. New value is : " )
                           .append( indicator.getValue(  ) ).append( "\n" );
-                    
+
                     createHistory( indicator );
                 }
             }
@@ -100,30 +100,32 @@ public class IndicatorUpdaterService
         return sbLogs.toString(  );
     }
 
-    private void createHistory(Indicator indicator)
+    private void createHistory( Indicator indicator )
     {
-        Indicator indicatorFull = IndicatorHome.findByKey( indicator.getIndKey() );
-        String strTimeCode = TimeCodeService.getCurrentTimeCode( indicatorFull.getHistoryPeriod() );
+        Indicator indicatorFull = IndicatorHome.findByKey( indicator.getIndKey(  ) );
+        String strTimeCode = TimeCodeService.getCurrentTimeCode( indicatorFull.getHistoryPeriod(  ) );
 
-        IndicatorHistory history = IndicatorHistoryHome.findByPrimaryKey( indicator.getIndKey(), strTimeCode);
-        if( history != null )
+        IndicatorHistory history = IndicatorHistoryHome.findByPrimaryKey( indicator.getIndKey(  ), strTimeCode );
+
+        if ( history != null )
         {
-            IndicatorHistoryHome.remove( indicator.getIndKey(), strTimeCode );
+            IndicatorHistoryHome.remove( indicator.getIndKey(  ), strTimeCode );
         }
 
-        history = new IndicatorHistory();
-        history.setIndKey( indicator.getIndKey() );
+        history = new IndicatorHistory(  );
+        history.setIndKey( indicator.getIndKey(  ) );
         history.setTimeCode( strTimeCode );
-        history.setIndValue( indicator.getValue() );
-        if( indicator.getIndTarget() != 0 )
-        {    
-            history.setIndTarget( indicator.getIndTarget() );
+        history.setIndValue( indicator.getValue(  ) );
+
+        if ( indicator.getIndTarget(  ) != 0 )
+        {
+            history.setIndTarget( indicator.getIndTarget(  ) );
         }
         else
         {
-            history.setIndTarget( indicatorFull.getIndTarget() );
+            history.setIndTarget( indicatorFull.getIndTarget(  ) );
         }
-        
+
         IndicatorHistoryHome.create( history );
     }
 }
