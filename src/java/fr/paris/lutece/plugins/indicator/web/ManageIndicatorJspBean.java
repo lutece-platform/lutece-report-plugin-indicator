@@ -63,6 +63,14 @@ public abstract class ManageIndicatorJspBean extends MVCAdminJspBean
     private String _strCurrentPageIndex;
     private int _nItemsPerPage;
 
+    /**
+     * Return a model that contains the list and paginator infos
+     * @param request The HTTP request
+     * @param strBookmark The bookmark
+     * @param list The list of item
+     * @param strManageJsp The JSP
+     * @return The model
+     */
     protected Map<String, Object> getPaginatedListModel( HttpServletRequest request, String strBookmark, List list,
         String strManageJsp )
     {

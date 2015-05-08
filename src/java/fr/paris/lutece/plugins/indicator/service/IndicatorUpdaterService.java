@@ -51,6 +51,10 @@ public class IndicatorUpdaterService
     private static List<IndicatorFetcher> _listFetchers;
     private static IndicatorUpdaterService _singleton;
 
+    /**
+     * Return the unique instance
+     * @return The unique instance
+     */
     public static synchronized IndicatorUpdaterService instance(  )
     {
         if ( _singleton == null )
@@ -62,6 +66,9 @@ public class IndicatorUpdaterService
         return _singleton;
     }
 
+    /**
+     * Register all fetchers defined in plugins context files
+     */
     private void registerFetchers(  )
     {
         _listFetchers = SpringContextService.getBeansOfType( IndicatorFetcher.class );
@@ -72,6 +79,10 @@ public class IndicatorUpdaterService
         }
     }
 
+    /**
+     * Fetch indicators values
+     * @return The fetch logs
+     */
     public String doFetch(  )
     {
         StringBuilder sbLogs = new StringBuilder(  );
@@ -100,6 +111,10 @@ public class IndicatorUpdaterService
         return sbLogs.toString(  );
     }
 
+    /**
+     * Create historical values for an indicator
+     * @param indicator The indicator
+     */
     private void createHistory( Indicator indicator )
     {
         Indicator indicatorFull = IndicatorHome.findByKey( indicator.getIndKey(  ) );

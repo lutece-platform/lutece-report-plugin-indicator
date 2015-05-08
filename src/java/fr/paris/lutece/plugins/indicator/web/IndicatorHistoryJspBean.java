@@ -102,6 +102,11 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
     // Session variable to store working values
     private IndicatorHistory _history;
 
+    /**
+     * Build the Manage View
+     * @param request The HTTP request
+     * @return The page
+     */
     @View( value = VIEW_MANAGE_HISTORY, defaultView = true )
     public String getManageHistory( HttpServletRequest request )
     {

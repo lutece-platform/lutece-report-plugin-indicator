@@ -101,6 +101,11 @@ public class IndicatorJspBean extends ManageIndicatorJspBean
     // Session variable to store working values
     private Indicator _indicator;
 
+    /**
+     * Build the Manage View
+     * @param request The HTTP request
+     * @return The page
+     */
     @View( value = VIEW_MANAGE_INDICATORS, defaultView = true )
     public String getManageIndicators( HttpServletRequest request )
     {
