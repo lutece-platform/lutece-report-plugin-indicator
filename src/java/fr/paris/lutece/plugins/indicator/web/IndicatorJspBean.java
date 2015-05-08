@@ -95,6 +95,7 @@ public class IndicatorJspBean extends ManageIndicatorJspBean
     private static final String INFO_INDICATOR_CREATED = "indicator.info.indicator.created";
     private static final String INFO_INDICATOR_UPDATED = "indicator.info.indicator.updated";
     private static final String INFO_INDICATOR_REMOVED = "indicator.info.indicator.removed";
+    private static final long serialVersionUID = 1L;
 
     // Session variable to store working values
     private Indicator _indicator;

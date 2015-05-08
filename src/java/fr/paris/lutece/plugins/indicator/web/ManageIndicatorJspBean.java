@@ -56,6 +56,7 @@ public abstract class ManageIndicatorJspBean extends MVCAdminJspBean
     private static final String PARAMETER_PAGE_INDEX = "page_index";
     private static final String MARK_PAGINATOR = "paginator";
     private static final String MARK_NB_ITEMS_PER_PAGE = "nb_items_per_page";
+    private static final long serialVersionUID = 1L;
 
     //Variables
     private int _nDefaultItemsPerPage;

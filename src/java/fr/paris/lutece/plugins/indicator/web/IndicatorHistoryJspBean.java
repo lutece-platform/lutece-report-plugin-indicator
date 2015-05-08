@@ -97,6 +97,7 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
     private static final String INFO_HISTORY_CREATED = "indicator.info.history.created";
     private static final String INFO_HISTORY_UPDATED = "indicator.info.history.updated";
     private static final String INFO_HISTORY_REMOVED = "indicator.info.history.removed";
+    private static final long serialVersionUID = 1L;
 
     // Session variable to store working values
     private IndicatorHistory _history;
