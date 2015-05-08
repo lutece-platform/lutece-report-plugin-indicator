@@ -57,7 +57,8 @@ public class IndicatorHistoryBusinessTest extends LuteceTestCase
         // Create test
         IndicatorHistoryHome.create( history );
 
-        IndicatorHistory historyStored = IndicatorHistoryHome.findByPrimaryKey( history.getIndKey() , history.getTimeCode() );
+        IndicatorHistory historyStored = IndicatorHistoryHome.findByPrimaryKey( history.getIndKey(  ),
+                history.getTimeCode(  ) );
         assertEquals( historyStored.getIndKey(  ), history.getIndKey(  ) );
         assertEquals( historyStored.getTimeCode(  ), history.getTimeCode(  ) );
         assertEquals( historyStored.getIndValue(  ), history.getIndValue(  ) );
@@ -67,7 +68,7 @@ public class IndicatorHistoryBusinessTest extends LuteceTestCase
         history.setIndValue( INDVALUE2 );
         history.setIndTarget( INDTARGET2 );
         IndicatorHistoryHome.update( history );
-        historyStored = IndicatorHistoryHome.findByPrimaryKey( history.getIndKey() , history.getTimeCode() );
+        historyStored = IndicatorHistoryHome.findByPrimaryKey( history.getIndKey(  ), history.getTimeCode(  ) );
         assertEquals( historyStored.getIndKey(  ), history.getIndKey(  ) );
         assertEquals( historyStored.getTimeCode(  ), history.getTimeCode(  ) );
         assertEquals( historyStored.getIndValue(  ), history.getIndValue(  ) );
@@ -77,8 +78,8 @@ public class IndicatorHistoryBusinessTest extends LuteceTestCase
         IndicatorHistoryHome.getIndicatorHistorysList( INDKEY1 );
 
         // Delete test
-        IndicatorHistoryHome.remove( history.getIndKey() , history.getTimeCode() );
-        historyStored = IndicatorHistoryHome.findByPrimaryKey( history.getIndKey() , history.getTimeCode() );
+        IndicatorHistoryHome.remove( history.getIndKey(  ), history.getTimeCode(  ) );
+        historyStored = IndicatorHistoryHome.findByPrimaryKey( history.getIndKey(  ), history.getTimeCode(  ) );
         assertNull( historyStored );
     }
 }

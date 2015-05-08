@@ -7,15 +7,15 @@
  * are met:
  *
  *  1. Redistributions of source code must retain the above copyright notice
- *         and the following disclaimer.
+ *     and the following disclaimer.
  *
  *  2. Redistributions in binary form must reproduce the above copyright notice
- *         and the following disclaimer in the documentation and/or other materials
- *         provided with the distribution.
+ *     and the following disclaimer in the documentation and/or other materials
+ *     provided with the distribution.
  *
  *  3. Neither the name of 'Mairie de Paris' nor 'Lutece' nor the names of its
- *         contributors may be used to endorse or promote products derived from
- *         this software without specific prior written permission.
+ *     contributors may be used to endorse or promote products derived from
+ *     this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -85,7 +85,7 @@ public final class IndicatorHistoryHome
      * @param strKey The Key
      * @param strTimeCode  The Timecode
      */
-    public static void remove( String strKey , String strTimeCode )
+    public static void remove( String strKey, String strTimeCode )
     {
         _dao.delete( strKey, strTimeCode, _plugin );
     }
@@ -99,7 +99,7 @@ public final class IndicatorHistoryHome
      * @param strTimeCode  The Timecode
      * @return an instance of IndicatorHistory
      */
-    public static IndicatorHistory findByPrimaryKey( String strKey , String strTimeCode )
+    public static IndicatorHistory findByPrimaryKey( String strKey, String strTimeCode )
     {
         return _dao.load( strKey, strTimeCode, _plugin );
     }

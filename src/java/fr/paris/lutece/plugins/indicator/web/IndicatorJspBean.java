@@ -231,6 +231,4 @@ public class IndicatorJspBean extends ManageIndicatorJspBean
 
         return redirectView( request, VIEW_MANAGE_INDICATORS );
     }
-    
-    
 }

@@ -63,9 +63,10 @@ public class IndicatorUpdaterService
     private void registerFetchers(  )
     {
         _listFetchers = SpringContextService.getBeansOfType( IndicatorFetcher.class );
-        for( IndicatorFetcher fetcher : _listFetchers )
+
+        for ( IndicatorFetcher fetcher : _listFetchers )
         {
-            AppLogService.info( "New Indicator fetcher registered : " + fetcher.getName());
+            AppLogService.info( "New Indicator fetcher registered : " + fetcher.getName(  ) );
         }
     }
 

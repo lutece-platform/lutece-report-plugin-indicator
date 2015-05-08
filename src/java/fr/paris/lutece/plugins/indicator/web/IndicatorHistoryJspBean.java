@@ -41,8 +41,8 @@ import fr.paris.lutece.portal.util.mvc.admin.annotations.Controller;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.Action;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
 import fr.paris.lutece.util.url.UrlItem;
-import java.util.HashMap;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -111,6 +111,7 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
         Map<String, Object> model = getPaginatedListModel( request, MARK_INDICATORHISTORY_LIST, listIndicatorHistorys,
                 JSP_MANAGE_HISTORY );
         model.put( MARK_KEY, strKey );
+
         return getPage( PROPERTY_PAGE_TITLE_MANAGE_HISTORY, TEMPLATE_MANAGE_HISTORY, model );
     }
 
@@ -125,7 +126,8 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
     {
         String strKey = request.getParameter( PARAMETER_KEY );
         _history = ( _history != null ) ? _history : new IndicatorHistory(  );
-        _history.setIndKey(strKey);
+        _history.setIndKey( strKey );
+
         Map<String, Object> model = getModel(  );
         model.put( MARK_INDICATORHISTORY, _history );
 
@@ -146,33 +148,37 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
         // Check constraints
         if ( !validateBean( _history, VALIDATION_ATTRIBUTES_PREFIX ) )
         {
-            Map<String,String> mapParameters = new HashMap<String,String>();
-            mapParameters.put( PARAMETER_KEY , _history.getIndKey() );
-            return redirect( request, VIEW_CREATE_HISTORY , mapParameters );
+            Map<String, String> mapParameters = new HashMap<String, String>(  );
+            mapParameters.put( PARAMETER_KEY, _history.getIndKey(  ) );
+
+            return redirect( request, VIEW_CREATE_HISTORY, mapParameters );
         }
 
-        try 
+        try
         {
             IndicatorHistoryHome.create( _history );
             addInfo( INFO_HISTORY_CREATED, getLocale(  ) );
 
-            Map<String,String> mapParameters = new HashMap<String,String>();
-            mapParameters.put( PARAMETER_KEY , _history.getIndKey() );
-            return redirect( request, VIEW_MANAGE_HISTORY , mapParameters );
+            Map<String, String> mapParameters = new HashMap<String, String>(  );
+            mapParameters.put( PARAMETER_KEY, _history.getIndKey(  ) );
+
+            return redirect( request, VIEW_MANAGE_HISTORY, mapParameters );
         }
-        catch( Exception e )
+        catch ( Exception e )
         {
-            if( e.getCause() != null )
+            if ( e.getCause(  ) != null )
             {
-                addError( e.getCause().getMessage() );
+                addError( e.getCause(  ).getMessage(  ) );
             }
             else
             {
-                addError( e.getMessage() );
+                addError( e.getMessage(  ) );
             }
-            Map<String,String> mapParameters = new HashMap<String,String>();
-            mapParameters.put( PARAMETER_KEY , _history.getIndKey() );
-            return redirect( request, VIEW_CREATE_HISTORY , mapParameters );
+
+            Map<String, String> mapParameters = new HashMap<String, String>(  );
+            mapParameters.put( PARAMETER_KEY, _history.getIndKey(  ) );
+
+            return redirect( request, VIEW_CREATE_HISTORY, mapParameters );
         }
     }
 
@@ -209,12 +215,13 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
     {
         String strKey = request.getParameter( PARAMETER_KEY );
         String strTimecode = request.getParameter( PARAMETER_TIMECODE );
-        IndicatorHistoryHome.remove( strKey , strTimecode );
+        IndicatorHistoryHome.remove( strKey, strTimecode );
         addInfo( INFO_HISTORY_REMOVED, getLocale(  ) );
 
-        Map<String,String> mapParameters = new HashMap<String,String>();
-        mapParameters.put( PARAMETER_KEY , _history.getIndKey() );
-        return redirect( request, VIEW_MANAGE_HISTORY , mapParameters );
+        Map<String, String> mapParameters = new HashMap<String, String>(  );
+        mapParameters.put( PARAMETER_KEY, _history.getIndKey(  ) );
+
+        return redirect( request, VIEW_MANAGE_HISTORY, mapParameters );
     }
 
     /**
@@ -229,9 +236,10 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
         String strKey = request.getParameter( PARAMETER_KEY );
         String strTimecode = request.getParameter( PARAMETER_TIMECODE );
 
-        if ( ( _history == null ) || ( ! _history.getIndKey().equals( strKey )) || ( _history.getTimeCode().equals( strTimecode )) )
+        if ( ( _history == null ) || ( !_history.getIndKey(  ).equals( strKey ) ) ||
+                ( _history.getTimeCode(  ).equals( strTimecode ) ) )
         {
-            _history = IndicatorHistoryHome.findByPrimaryKey( strKey , strTimecode );
+            _history = IndicatorHistoryHome.findByPrimaryKey( strKey, strTimecode );
         }
 
         Map<String, Object> model = getModel(  );
@@ -254,17 +262,19 @@ public class IndicatorHistoryJspBean extends ManageIndicatorJspBean
         // Check constraints
         if ( !validateBean( _history, VALIDATION_ATTRIBUTES_PREFIX ) )
         {
-            Map<String,String> mapParameters = new HashMap<String,String>();
-            mapParameters.put( PARAMETER_KEY , _history.getIndKey() );
-            mapParameters.put( PARAMETER_TIMECODE, _history.getTimeCode() );
+            Map<String, String> mapParameters = new HashMap<String, String>(  );
+            mapParameters.put( PARAMETER_KEY, _history.getIndKey(  ) );
+            mapParameters.put( PARAMETER_TIMECODE, _history.getTimeCode(  ) );
+
             return redirect( request, VIEW_MODIFY_HISTORY, mapParameters );
         }
 
         IndicatorHistoryHome.update( _history );
         addInfo( INFO_HISTORY_UPDATED, getLocale(  ) );
 
-        Map<String,String> mapParameters = new HashMap<String,String>();
-        mapParameters.put( PARAMETER_KEY , _history.getIndKey() );
-        return redirect( request, VIEW_MANAGE_HISTORY , mapParameters );
+        Map<String, String> mapParameters = new HashMap<String, String>(  );
+        mapParameters.put( PARAMETER_KEY, _history.getIndKey(  ) );
+
+        return redirect( request, VIEW_MANAGE_HISTORY, mapParameters );
     }
 }

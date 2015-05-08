@@ -36,6 +36,7 @@ package fr.paris.lutece.plugins.indicator.service;
 import java.util.Calendar;
 import java.util.Date;
 
+
 /**
  * TimeCodeService
  */
@@ -44,37 +45,36 @@ public class TimeCodeService
     public static final String PERIOD_DAY = "D";
     public static final String PERIOD_WEEK = "W";
     public static final String PERIOD_MONTH = "M";
-
     private static final String FORMAT_DAY = "%04d-%02d-%02d";
     private static final String FORMAT_WEEK = "%04d-W%02d";
     private static final String FORMAT_MONTH = "%04d-%02d";
-    
     private static final String INVALID_TIME_CODE = "000000";
 
     public static String getCurrentTimeCode( String strPeriod )
     {
         String strTimeCode = INVALID_TIME_CODE;
-        
-        Calendar cal = Calendar.getInstance();
-        cal.setTime( new Date() );
-        int nYear = cal.get(Calendar.YEAR);
-        int nMonth = cal.get(Calendar.MONTH) + 1;
-        int nDay = cal.get( Calendar.DAY_OF_MONTH );
-        int nWeek = cal.get(Calendar.WEEK_OF_YEAR);
 
-        if( strPeriod.equalsIgnoreCase( PERIOD_DAY ))
+        Calendar cal = Calendar.getInstance(  );
+        cal.setTime( new Date(  ) );
+
+        int nYear = cal.get( Calendar.YEAR );
+        int nMonth = cal.get( Calendar.MONTH ) + 1;
+        int nDay = cal.get( Calendar.DAY_OF_MONTH );
+        int nWeek = cal.get( Calendar.WEEK_OF_YEAR );
+
+        if ( strPeriod.equalsIgnoreCase( PERIOD_DAY ) )
         {
-            strTimeCode = String.format( FORMAT_DAY , nYear , nMonth , nDay );
+            strTimeCode = String.format( FORMAT_DAY, nYear, nMonth, nDay );
         }
-        else if( strPeriod.equalsIgnoreCase( PERIOD_WEEK ))
+        else if ( strPeriod.equalsIgnoreCase( PERIOD_WEEK ) )
         {
-            strTimeCode = String.format( FORMAT_WEEK , nYear , nWeek );
+            strTimeCode = String.format( FORMAT_WEEK, nYear, nWeek );
         }
-        else if( strPeriod.equalsIgnoreCase( PERIOD_MONTH ))
+        else if ( strPeriod.equalsIgnoreCase( PERIOD_MONTH ) )
         {
-            strTimeCode = String.format( FORMAT_MONTH , nYear , nMonth );
+            strTimeCode = String.format( FORMAT_MONTH, nYear, nMonth );
         }
+
         return strTimeCode;
     }
-    
 }

@@ -31,10 +31,10 @@
  *
  * License 1.0
  */
-
 package fr.paris.lutece.plugins.indicator.service;
 
 import org.junit.Test;
+
 
 /**
  *
@@ -42,17 +42,15 @@ import org.junit.Test;
  */
 public class TimeCodeServiceTest
 {
-
     /**
      * Test of getCurrentTimeCode method, of class TimeCodeService.
      */
     @Test
-    public void testGetCurrentTimeCode()
+    public void testGetCurrentTimeCode(  )
     {
-        System.out.println("getCurrentTimeCode");
-        System.out.println( TimeCodeService.getCurrentTimeCode( TimeCodeService.PERIOD_DAY ));
-        System.out.println( TimeCodeService.getCurrentTimeCode( TimeCodeService.PERIOD_WEEK ));
-        System.out.println( TimeCodeService.getCurrentTimeCode( TimeCodeService.PERIOD_MONTH ));
+        System.out.println( "getCurrentTimeCode" );
+        System.out.println( TimeCodeService.getCurrentTimeCode( TimeCodeService.PERIOD_DAY ) );
+        System.out.println( TimeCodeService.getCurrentTimeCode( TimeCodeService.PERIOD_WEEK ) );
+        System.out.println( TimeCodeService.getCurrentTimeCode( TimeCodeService.PERIOD_MONTH ) );
     }
-    
 }
